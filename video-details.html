@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Details</title>
+    <style>
+        /* Simple styles for the video player */
+        #video-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        iframe {
+            width: 100%;
+            max-width: 800px;
+            height: 450px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="video-container"></div>
+
+    <script>
+        // Get video ID from URL query parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoId = urlParams.get('videoId'); // Get the videoId from the URL
+
+        if (videoId) {
+            // Create and insert the YouTube iframe player with the video ID
+            const videoContainer = document.getElementById('video-container');
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube.com/embed/${videoId}`;
+            iframe.frameborder = "0";
+            iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
+            iframe.allowfullscreen = true;
+            videoContainer.appendChild(iframe);
+        } else {
+            alert('No video ID found!');
+        }
+    </script>
+
+</body>
+</html>
