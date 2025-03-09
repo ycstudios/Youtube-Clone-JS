@@ -2,6 +2,8 @@
 let leftMenuBtn = document.querySelector('#slid_btn');
 let leftMenu = document.querySelector('#left_menu');
 let bottomPart = document.querySelector('#bottom_part');
+const searchInput = document.getElementById('search');
+const searchButton = document.getElementById('s_icon');
 
 // Toggle sidebar
 leftMenuBtn.addEventListener('click', () => {
@@ -14,23 +16,34 @@ leftMenuBtn.addEventListener('click', () => {
     }
 });
 
-
-
 const API_KEY = "AIzaSyA5lScQ5BFaFVIMA8QLkGhI2Xs_OpLzXLw";
 const VIDEO_CONTAINER = document.getElementById("video-container");
 const FILTER_BUTTONS = document.querySelectorAll(".filter-btn");
 
-// Function to fetch videos based on category
-async function fetchVideos(category = "mostPopular") {
+// Function to fetch videos based on category or search query
+async function fetchVideos(category = "mostPopular", searchQuery = "") {
     try {
-        let url = `https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&part=snippet,statistics,contentDetails&chart=mostPopular&maxResults=50&regionCode=IN`;
-
-        if (category !== "mostPopular") {
+        let url;
+        
+        if (searchQuery) {
+            // If there's a search query, use search endpoint
+            url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&part=snippet&type=video&q=${searchQuery}&maxResults=50&regionCode=IN`;
+        } else if (category !== "mostPopular") {
+            // If there's a category (but no search query), use search endpoint with category
             url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&part=snippet&type=video&q=${category}&maxResults=50&regionCode=IN`;
+        } else {
+            // Default: most popular videos
+            url = `https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&part=snippet,statistics,contentDetails&chart=mostPopular&maxResults=50&regionCode=IN`;
         }
 
         const response = await fetch(url);
         const data = await response.json();
+        
+        // Clear active filter buttons when searching
+        if (searchQuery) {
+            FILTER_BUTTONS.forEach(btn => btn.classList.remove("active"));
+        }
+        
         displayVideos(data.items);
     } catch (error) {
         console.error("Error fetching videos:", error);
@@ -66,8 +79,13 @@ function convertDuration(isoDuration) {
 async function displayVideos(videos) {
     VIDEO_CONTAINER.innerHTML = ""; // Clear previous videos
 
+    if (videos.length === 0) {
+        VIDEO_CONTAINER.innerHTML = "<h2>No videos found</h2>";
+        return;
+    }
+
     for (const video of videos) {
-        const videoId = video.id.videoId || video.id; // Handle search API response
+        const videoId = video.id?.videoId || video.id; // Handle search API response
         const channelImage = await getChannelImage(video.snippet.channelId);
         const duration = video.contentDetails ? convertDuration(video.contentDetails.duration) : "N/A"; // Duration handling
 
@@ -99,11 +117,12 @@ async function displayVideos(videos) {
     }
 }
 
-
-
 // Handle filter button clicks and update active class
 FILTER_BUTTONS.forEach((button) => {
     button.addEventListener("click", () => {
+        // Clear search input when filter is clicked
+        searchInput.value = "";
+        
         // Remove 'active' class from all buttons
         FILTER_BUTTONS.forEach(btn => btn.classList.remove("active"));
 
@@ -116,7 +135,23 @@ FILTER_BUTTONS.forEach((button) => {
     });
 });
 
+// Add search functionality
+function handleSearch() {
+    const query = searchInput.value.trim();
+    if (query) {
+        fetchVideos("", query);
+    }
+}
+
+// Execute search on button click
+searchButton.addEventListener('click', handleSearch);
+
+// Execute search on Enter key press
+searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        handleSearch();
+    }
+});
+
 // Fetch default videos on page load
 fetchVideos();
-
-
