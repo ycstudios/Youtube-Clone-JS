@@ -20,19 +20,16 @@ const API_KEY = "AIzaSyA5lScQ5BFaFVIMA8QLkGhI2Xs_OpLzXLw";
 const VIDEO_CONTAINER = document.getElementById("video-container");
 const FILTER_BUTTONS = document.querySelectorAll(".filter-btn");
 
-// Function to fetch videos based on category or search query
+// Function to fech videos based on category or search query
 async function fetchVideos(category = "mostPopular", searchQuery = "") {
     try {
         let url;
         
         if (searchQuery) {
-            // If there's a search query, use search endpoint
             url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&part=snippet&type=video&q=${searchQuery}&maxResults=50&regionCode=IN`;
         } else if (category !== "mostPopular") {
-            // If there's a category (but no search query), use search endpoint with category
             url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&part=snippet&type=video&q=${category}&maxResults=50&regionCode=IN`;
         } else {
-            // Default: most popular videos
             url = `https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&part=snippet,statistics,contentDetails&chart=mostPopular&maxResults=50&regionCode=IN`;
         }
 
@@ -75,9 +72,9 @@ function convertDuration(isoDuration) {
     return `${hours ? `${hours}:` : ""}${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
 }
 
-// Display videos in the container
+
 async function displayVideos(videos) {
-    VIDEO_CONTAINER.innerHTML = ""; // Clear previous videos
+    VIDEO_CONTAINER.innerHTML = "";
 
     if (videos.length === 0) {
         VIDEO_CONTAINER.innerHTML = "<h2>No videos found</h2>";
@@ -85,9 +82,9 @@ async function displayVideos(videos) {
     }
 
     for (const video of videos) {
-        const videoId = video.id?.videoId || video.id; // Handle search API response
+        const videoId = video.id?.videoId || video.id; 
         const channelImage = await getChannelImage(video.snippet.channelId);
-        const duration = video.contentDetails ? convertDuration(video.contentDetails.duration) : "N/A"; // Duration handling
+        const duration = video.contentDetails ? convertDuration(video.contentDetails.duration) : "N/A"; 
 
         const videoElement = document.createElement("div");
         videoElement.classList.add("first-video");
@@ -117,25 +114,21 @@ async function displayVideos(videos) {
     }
 }
 
-// Handle filter button clicks and update active class
 FILTER_BUTTONS.forEach((button) => {
     button.addEventListener("click", () => {
-        // Clear search input when filter is clicked
         searchInput.value = "";
         
-        // Remove 'active' class from all buttons
         FILTER_BUTTONS.forEach(btn => btn.classList.remove("active"));
 
-        // Add 'active' class to the clicked button
+
         button.classList.add("active");
 
-        // Fetch videos based on selected category
+
         const category = button.innerText.toLowerCase();
         fetchVideos(category);
     });
 });
 
-// Add search functionality
 function handleSearch() {
     const query = searchInput.value.trim();
     if (query) {
@@ -143,15 +136,15 @@ function handleSearch() {
     }
 }
 
-// Execute search on button click
+
 searchButton.addEventListener('click', handleSearch);
 
-// Execute search on Enter key press
+
 searchInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         handleSearch();
     }
 });
 
-// Fetch default videos on page load
+
 fetchVideos();
