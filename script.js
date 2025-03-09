@@ -1,6 +1,5 @@
 // Get elements
-let leftMenuBtn = document.querySelector('#slid_btn');
-let leftMenu = document.querySelector('#left_menu');
+c
 let bottomPart = document.querySelector('#bottom_part');
 const searchInput = document.getElementById('search');
 const searchButton = document.getElementById('s_icon');
@@ -17,7 +16,7 @@ leftMenuBtn.addEventListener('click', () => {
     }
 });
 
-// const API_KEY = "AIzaSyA5lScQ5BFaFVIMA8QLkGhI2Xs_OpLzXLw";
+const API_KEY = "AIzaSyA5lScQ5BFaFVIMA8QLkGhI2Xs_OpLzXLw";
 const VIDEO_CONTAINER = document.getElementById("video-container");
 const FILTER_BUTTONS = document.querySelectorAll(".filter-btn");
 

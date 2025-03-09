@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Create and insert the YouTube iframe player with the video ID
         const videoContainer = document.getElementById('video-container');
         videoContainer.innerHTML = `
-            <iframe 
+            <iframe
                 src="https://www.youtube.com/embed/${videoId}" 
                 frameborder="0" 
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
