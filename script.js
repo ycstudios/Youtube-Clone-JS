@@ -1,4 +1,5 @@
-// Get elements
+import { API_KEY } from './config.js'; 
+
 let leftMenuBtn = document.querySelector('#slid_btn');
 let leftMenu = document.querySelector('#left_menu');
 let bottomPart = document.querySelector('#bottom_part');
@@ -17,7 +18,6 @@ leftMenuBtn.addEventListener('click', () => {
     }
 });
 
-const API_KEY = "AIzaSyA5lScQ5BFaFVIMA8QLkGhI2Xs_OpLzXLw";
 const VIDEO_CONTAINER = document.getElementById("video-container");
 const FILTER_BUTTONS = document.querySelectorAll(".filter-btn");
 
@@ -35,7 +35,7 @@ async function fetchVideos(category = "mostPopular", searchQuery = "") {
         }
 
         const response = await fetch(url);
-        const data = await response.json();
+        const data  = await response.json();
         
         // Clear active filter buttons when searching
         if (searchQuery) {
@@ -44,7 +44,7 @@ async function fetchVideos(category = "mostPopular", searchQuery = "") {
         
         displayVideos(data.items);
     } catch (error) {
-        console.error("Error fetching videos:", error);
+        console.error("Error fetching videos:", error);4
         VIDEO_CONTAINER.innerHTML = "<h2>Failed to load videos</h2>";
     }
 }
