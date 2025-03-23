@@ -5,8 +5,9 @@
    width: 1000px;
 }
 iframe {
-    max-width: 1200px; 
-    height: 559px; 
+    width: 100%;  /* Makes the iframe responsive to the container's width */
+    max-width: 1600px;  /* Sets a maximum width for larger screens */
+    height: 559px;
     border-radius: 15px;
     border: none;
 }
