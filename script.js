@@ -5,7 +5,6 @@ let leftMenu = document.querySelector('#left_menu');
 let bottomPart = document.querySelector('#bottom_part');
 const searchInput = document.getElementById('search');
 const searchButton = document.getElementById('s_icon');
-const sidebar=document.getElementById('left_menu')
 
 // Toggle sidebar
 leftMenuBtn.addEventListener('click', () => {

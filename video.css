@@ -139,6 +139,7 @@ iframe {
     color: white;
     overflow-y: auto;
     height: 100%;
+
 }
 
 .video-player-container {
@@ -152,6 +153,9 @@ iframe {
     align-items: center;
     margin-bottom: 10px;
     margin-top: 10px;
+    border-bottom: 1px solid red;
+    border-radius: 25px;
+    margin: 20px;
 }
 
 .related-video img {
@@ -164,7 +168,8 @@ iframe {
 .related-video p {
     color: white;
     font-size: 14px;
-    margin: 0;
+    align-content: center;
+ 
 }
 
 .related-video a{

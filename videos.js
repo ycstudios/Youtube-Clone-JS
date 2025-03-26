@@ -1,10 +1,11 @@
-// YouTube Video Playback Script
-// Store API key in a constant - replace YOUR_API_KEY with your actual YouTube API key
+
 const API_KEY = "AIzaSyCiiI8KaUKPCPv7XRn8LLc605P9sywljIU";
+const searchInput = document.getElementById('search');
+const searchButton = document.getElementById('s_icon');
 
 document.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);
-    const videoId = urlParams.get('videoId'); // Retrieve videoId from the query parameter
+    const videoId = urlParams.get('videoId');
     console.log("Current Video ID:", videoId);
 
     const videoPlayerContainer = document.querySelector("#video-player");
@@ -14,6 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const videoApiUrl = "https://www.googleapis.com/youtube/v3/videos?";
     const channelApiUrl = "https://www.googleapis.com/youtube/v3/channels?";
     const relatedVideosApiUrl = "https://www.googleapis.com/youtube/v3/search?";
+
+    
 
     // Embed the video iframe if the videoId is present and video-container exists
     if (videoId && videoContainer) {
@@ -177,13 +180,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 const videoElement = document.createElement("div");
                 videoElement.classList.add("related-video");
                 videoElement.innerHTML = `
-                    <a class="related-video-a1" href="video-details.html?videoId=${item.id.videoId}">
+                    <a  class="related-video-a1" href="video-details.html?videoId=${item.id.videoId}">
                         <img src="${video.thumbnails.default.url}" alt="${video.title}">
                         <p>${video.title}</p>
-                    </a>
-                    <a class="related-video-a2">
-                        <p>${video.channelTitle}</p>
-                        <p>${new Date(video.publishedAt).toLocaleDateString()}</p>
                     </a>
                 `;
                 relatedVideosContainer.appendChild(videoElement);
