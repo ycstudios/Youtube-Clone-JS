@@ -1,47 +1,50 @@
-#video-container{
+/* Main container styling */
+#video-container {
     position: relative;
-    left: 5px;
     margin: 0;
-   width: 1000px;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 5px;
 }
+
+/* Video player styling */
 iframe {
-    width: 100%;  /* Makes the iframe responsive to the container's width */
-    max-width: 1600px;  /* Sets a maximum width for larger screens */
-    height: 559px;
+    width: 100%;
+    max-width: 1000px;
+    height: 562px;
     border-radius: 15px;
     border: none;
-}
-.video-div {
-    position: relative;
-    height: auto;
-    /* width: 1210px; */
-    top: 0px;
-    /* left: 100px; */
-    color: white;
-    display: flex;
-    /* justify-content: center; */
-    flex-direction: column;
+    display: block;
 }
 
 .videoPage-video {
-    width: 900px;
+    width: 100%;
+    max-width: 1000px;
+    height: 550px;
     border-radius: 10px;
-    height: 500px;
     margin-bottom: 20px;
 }
 
+.video-div {
+    position: relative;
+    height: auto;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Video title styling */
 .videoPage-title {
-    width: 900px;
+    width: 100%;
+    max-width: 900px;
     font-size: 20px;
     font-weight: 700;
     color: white;
     margin-bottom: 10px;
+    line-height: 1.4;
 }
 
-.videoPage-video-container {
-    width: 59%;
-}
-
+/* Channel information container */
 .videoPage-channel-container {
     display: flex;
     width: 100%;
@@ -51,8 +54,8 @@ iframe {
 }
 
 .videoPage-channel {
-    width: 900px;
-    /* margin-right: 100px; */
+    width: 100%;
+    max-width: 900px;
 }
 
 .videoPage-channel-icon-container {
@@ -63,17 +66,20 @@ iframe {
 .videoPage-channel-icon {
     width: 40px;
     height: 40px;
-    border-radius: 1000px;
+    border-radius: 50%;
     margin-right: 10px;
 }
 
+/* Video description styling */
 .videoPage-description-text {
     margin-top: 10px;
     font-size: 15px;
+    line-height: 1.5;
     margin-bottom: 10px;
     background-color: hsla(0, 0%, 30%, 0.5);
-    padding: 10px;
+    padding: 15px;
     border-radius: 10px;
+    transition: all 0.3s ease;
 }
 
 .videoPage-description-text #description {
@@ -81,8 +87,10 @@ iframe {
     -webkit-line-clamp: 2; /* Number of lines to show */
     -webkit-box-orient: vertical;
     overflow: hidden;
+    transition: all 0.3s ease;
 }
 
+/* Like/dislike button styling */
 .videoPage-likes-dislikes {
     display: flex;
     align-items: center;
@@ -91,8 +99,9 @@ iframe {
     color: white;
     border: none;
     border-radius: 30px;
-    padding: 10px;
+    padding: 10px 15px;
     cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
 #like-button, #dislike-button {
@@ -101,6 +110,7 @@ iframe {
     border: none;
     padding: 10px;
     cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 #like-button {
@@ -108,8 +118,9 @@ iframe {
 }
 
 #like-button:hover, #dislike-button:hover {
-    background-color: #333;
+    background-color: hsla(0, 0%, 40%, 0.7);
     border-radius: 30px;
+    transform: scale(1.05);
 }
 
 #see-more-button {
@@ -119,65 +130,133 @@ iframe {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-weight: 500;
 }
 
 #see-more-button:hover {
-    background-color: #333;
+    background-color: hsla(0, 0%, 40%, 0.7);
 }
 
+/* Video player layout */
 #video-player {
     display: flex;
-}
-
-.related-videos-container {
-    width: 520px;
-    margin-left: 50px;
-    display: flex;
-    /* background-color: rgb(207, 0, 0); */
-    justify-content: start;
-    flex-direction: column;
-    color: white;
-    overflow-y: auto;
-    height: 100%;
-
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .video-player-container {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
+    flex-wrap: wrap;
+    padding: 20px 0;
+    gap: 20px;
+}
+
+/* Related videos section */
+.related-videos-container {
+    width: 100%;
+    max-width: 520px;
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    color: white;
+    overflow-y: auto;
+    max-height: 800px;
+    scrollbar-width: thin;
+    scrollbar-color: hsla(0, 0%, 40%, 0.5) transparent;
+}
+
+.related-videos-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.related-videos-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.related-videos-container::-webkit-scrollbar-thumb {
+    background-color: hsla(0, 0%, 40%, 0.5);
+    border-radius: 10px;
 }
 
 .related-video {
     display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    border-bottom: 1px solid red;
-    border-radius: 25px;
-    margin: 20px;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid hsla(0, 100%, 50%, 0.3);
+    border-radius: 8px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    padding: 10px;
+}
+
+.related-video:hover {
+    background-color: hsla(0, 0%, 25%, 0.5);
+    transform: translateX(5px);
 }
 
 .related-video img {
-    width: 188px auto;
-    /* height: 94px; */
+    width: 168px;
+    height: auto;
     margin-right: 10px;
     border-radius: 10px;
+    object-fit: cover;
 }
 
 .related-video p {
     color: white;
     font-size: 14px;
-    align-content: center;
- 
+    line-height: 1.4;
+    margin: 5px 0;
 }
 
-.related-video a{
+.related-video a {
     display: flex;
-    /* align-items: center; */
+    text-decoration: none;
 }
 
-.related-video-div a{
+.related-video-div a {
     display: flex;
     flex-direction: column;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 1200px) {
+    #video-container {
+        width: 100%;
+    }
+    
+    .related-videos-container {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 900px) {
+    iframe, .videoPage-video {
+        height: 450px;
+    }
+    
+    #video-player {
+        flex-direction: column;
+    }
+    
+    .related-videos-container {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    iframe, .videoPage-video {
+        height: 300px;
+    }
+    
+    .videoPage-title {
+        font-size: 18px;
+    }
+    
+    .related-video img {
+        width: 120px;
+    }
 }

@@ -21,11 +21,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // Embed the video iframe if the videoId is present and video-container exists
     if (videoId && videoContainer) {
         videoContainer.innerHTML = `
-<iframe width="1000" height="550" src="https://www.youtube.com/embed/${videoId}" 
-    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-        `;
+        <iframe class="videoPage-video"  
+            src="https://www.youtube.com/embed/${videoId}" 
+            title="YouTube video player" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+        </iframe>
+    `;
+    
     }
 
     // Fetch video and related details if videoPlayerContainer is found and videoId is present
